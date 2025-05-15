@@ -40,3 +40,5 @@ Please keep in mind that any files written by me are available under GPLv3 as ac
 - [generators.ron]
 - [generators.toHyprconf]
 - [generators.toSwaylockConf]
+
+[LICENSE]: ./LICENSE
