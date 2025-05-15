@@ -1,8 +1,11 @@
-{lib, ...}: let
+{
+  lib,
+  self,
+}: let
   inherit (lib) nixosSystem;
   inherit (lib.modules) mkDefault;
-  inherit (lib.lunar.importers) listNixRecursive;
   inherit (lib.lists) flatten singleton;
+  inherit (self.importers) listNixRecursive;
   inherit (builtins) map concatLists;
 in
   {
