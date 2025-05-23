@@ -1,17 +1,22 @@
-{lib, ...}: let
+{
+  lib,
+  self,
+}: let
   inherit (lib.lists) flatten;
+  inherit (self.importers) listNixRecursive;
 in
   {
     pkgs,
     inputs,
     moduleDir,
     languages ? ["nix"],
-  }: (inputs.nvf.lib.neovimConfiguration {
+  }:
+    (inputs.nvf.lib.neovimConfiguration {
       inherit pkgs;
       modules = flatten [
-        (moduleDir + /common)
-        (moduleDir + /options)
-        (map (lang: (moduleDir + /languages + /${lang})) languages)
+        (listNixRecursive (moduleDir + /common))
+        (listNixRecursive (moduleDir + /options))
+        (map (lang: (moduleDir + /languages + /${lang} + "module.nix")) languages)
       ];
     })
     .neovim
