@@ -4,23 +4,23 @@
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
   outputs = inputs: let
-    importFunction = location: name: (import (./lib + /${location} + /${name} + ".nix") {
+    importFunction = location: (import (./lib + /${builtins.concatStringsSep "/" location} + ".nix") {
       inherit (inputs.nixpkgs) lib;
       inherit (inputs) self;
     });
   in {
     builders = {
-      mkHost = importFunction "builders" "mkHost";
-      mkNovavimPackage = importFunction "builders" "mkNovavimPackage";
+      mkHost = importFunction ["builders" "mkHost"];
+      mkNovavimPackage = importFunction ["builders" "mkNovavimPackage"];
     };
     generators = {
-      ron = importFunction "generators" "ron";
-      toHyprconf = importFunction "generators" "toHyprconf";
-      toSwaylockConf = importFunction "generators" "toSwaylockConf";
+      ron = importFunction ["generators" "ron"];
+      toHyprconf = importFunction ["generators" "toHyprconf"];
+      toSwaylockConf = importFunction ["generators" "toSwaylockConf"];
     };
     importers = {
-      listFilesRecursiveClean = importFunction "importers" "listFilesRecursiveClean";
-      listNixRecursive = importFunction "importers" "listNixRecursive";
+      listFilesRecursiveClean = importFunction ["importers" "listFilesRecursiveClean"];
+      listNixRecursive = importFunction ["importers" "listNixRecursive"];
     };
   };
 }
