@@ -13,10 +13,13 @@ in
   }:
     (inputs.nvf.lib.neovimConfiguration {
       inherit pkgs;
+      extraSpecialArgs = {
+        inherit (inputs) lunarsLib;
+      };
       modules = flatten [
         (listNixRecursive (moduleDir + /common))
         (listNixRecursive (moduleDir + /options))
-        (map (lang: (moduleDir + /languages + /${lang} + "module.nix")) languages)
+        (map (lang: (moduleDir + /languages + /${lang} + /module.nix)) languages)
       ];
     })
     .neovim
