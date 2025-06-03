@@ -14,6 +14,7 @@
       mkNovavimPackage = importFunction ["builders" "mkNovavimPackage"];
     };
     generators = {
+      mkCosmicSettings = importFunction ["generators" "mkCosmicSettings"];
       ron = importFunction ["generators" "ron"];
       toHyprconf = importFunction ["generators" "toHyprconf"];
       toSwaylockConf = importFunction ["generators" "toSwaylockConf"];
