@@ -4,9 +4,9 @@
 }: let
   inherit (lib) nixosSystem;
   inherit (lib.modules) mkDefault;
-  inherit (lib.lists) flatten singleton;
+  inherit (lib.lists) flatten;
   inherit (self.importers) listNixRecursive;
-  inherit (builtins) map concatLists;
+  inherit (builtins) map;
 in
   {
     # Please note, this fucked up function was inspired by notashelf/nyx,
@@ -38,31 +38,28 @@ in
           inherit self' inputs';
           inherit (config._module.args) theme lunixpkgs;
         };
-        modules = flatten (
-          concatLists [
-            # singleton just makes a list with one element
-            (singleton {
-              # Declare the hostName c:
-              networking.hostName = hostName;
+        modules = flatten [
+          {
+            # Declare the hostName c:
+            networking.hostName = hostName;
 
-              nixpkgs = {
-                hostPlatform = mkDefault system;
-              };
-            })
+            nixpkgs = {
+              hostPlatform = mkDefault system;
+            };
+          }
 
-            # Import desktop and profile config modules
-            (map (n: (moduleDir + /desktops + /${n} + /module.nix)) desktops)
-            (map (n: (moduleDir + /profiles + /${n} + /module.nix)) profiles)
+          # Import desktop and profile config modules
+          (map (n: (moduleDir + /desktops + /${n} + /module.nix)) desktops)
+          (map (n: (moduleDir + /profiles + /${n} + /module.nix)) profiles)
 
-            # All hosts import the common modules
-            (listNixRecursive (moduleDir + /common))
+          # All hosts import the common modules
+          (listNixRecursive (moduleDir + /common))
 
-            # Import host modules
-            (listNixRecursive (hostDir + /${hostName}))
+          # Import host modules
+          (listNixRecursive (hostDir + /${hostName}))
 
-            # Additional modules for importation can be declared as well.
-            # This is usually system specific stuff.
-            extraImports
-          ]
-        );
+          # Additional modules for importation can be declared as well.
+          # This is usually system specific stuff.
+          extraImports
+        ];
       })
