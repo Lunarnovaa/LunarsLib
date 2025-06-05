@@ -8,20 +8,29 @@
   inherit (self.importers) listNixRecursive;
   inherit (builtins) map;
 in
+  /*
+  Please note, this fucked up function was inspired by NotAShelf/nyx,
+  especially the module importing function.
+  Basically, to minimize the re-use of code, I created a custom function
+  calling for all the special details I would need per host.
+  Mainly, it's useful with my flake-parts system to reduce the clutter
+  induced by "withSystem," but the module importing function especially
+  is unique, which imports only the modules needed for the profiles and desktops declared
+  */
   {
-    # Please note, this fucked up function was inspired by notashelf/nyx,
-    # especially the module importing function.
-    # Basically, to minimize the re-use of code, I created a custom function
-    # calling for all the special details I would need per host.
-    # Mainly, it's useful with my flake-parts system to reduce the clutter
-    # induced by "withSystem," but the module importing function especially
-    # is unique, which imports only the modules needed for the profiles and desktops declared
     inputs,
     withSystem,
-    system,
-    hostName,
     moduleDir,
     hostDir,
+  }:
+  /*
+  I break the attrset of inputs into two in order to allow myself to break up the function
+  inputs into lambdas allowing me to reduce the amount of boiler plate in my code. Please
+  see Lunarnovaa/Lunix:hosts/default.nix for an example of this.
+  */
+  {
+    system,
+    hostName,
     desktops ? [],
     profiles ? [],
     extraImports ? [],
