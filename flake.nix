@@ -22,6 +22,7 @@
     importers = {
       listFilesRecursiveClean = importFunction ["importers" "listFilesRecursiveClean"];
       listNixRecursive = importFunction ["importers" "listNixRecursive"];
+      packagesFromDirectoryRecursive = importFunction ["importers" "packagesFromDirectoryRecursive"];
     };
     systems = {
       forAllSystems = importFunction ["systems" "forAllSystems"];
