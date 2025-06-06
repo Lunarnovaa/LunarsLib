@@ -23,15 +23,16 @@ A repository of functions that I have used in my Nix projects.
 | [generators.ron]                           | A set of functions for converting to and from RON code.                                         | [MIT (Cosmic Manager)] |
 | [generators.toHyprconf]                    | A generator for turning Nix into Hyprconf.                                                      | [MIT (Home Manager)]   |
 | [generators.toSwaylockConf]                | A generator for turning Nix into Swaylockconf.                                                  | [MIT (Home Manager)]   |
-| [importers.listFilesRecursiveClean]        | A rewrite of `listFilesRecursive` in a pipe function plus filtering files prefixed with `_`.    | [GPLv3]                |
+| [importers.listFilesRecursiveClean]        | A rewrite of `listFilesRecursive` in a pipe function plus filtering files prefixed with `_`.    | [MIT (Nixpkgs)]        |
 | [importers.listNixRecursive]               | `listFilesRecursiveClean` but only listing Nix files.                                           | [GPLv3]                |
-| [importers.packagesFromDirectoryRecursive] | A rewrite of `packagesFromDirectoryRecursive` to allow for `specialArgs`.                       | [GPLv3]                |
+| [importers.packagesFromDirectoryRecursive] | A rewrite of `packagesFromDirectoryRecursive` to allow for `specialArgs`.                       | [MIT (Nixpkgs)]        |
 | [systems.forAllSystems]                    | A simple function to manage flake outputs with multiple systems.                                | [GPLv3]                |
 
 [GPLv3]: ./LICENSE
 [nvf]: https://github.com/notashelf/nvf
 [MIT (Cosmic Manager)]: https://github.com/HeitorAugustoLN/cosmic-manager/blob/main/LICENSE-MIT
 [MIT (Home Manager)]: https://github.com/nix-community/home-manager/blob/master/LICENSE
+[MIT (Nixpkgs)]: https://github.com/NixOS/nixpkgs/blob/master/COPYING
 
 ## Usage & Contribution
 
@@ -44,9 +45,9 @@ yell at me for anything I did, open an issue.
 
 All code outside of `lib/` is available under GPLv3 as according to the
 [LICENSE]. For functions contained in `lib/`, please see the table above for
-specifics on which functions are available under which license. Each function
-not written or modified by me also has a license header within the file itself
-noting it in addition to the table above.
+specifics on which functions are available under which license. Any function not
+written fully by myself also has a license header noting its status, either
+taken in full or in part from another project, under another license.
 
 - [generators.ron]
 - [generators.toHyprconf]

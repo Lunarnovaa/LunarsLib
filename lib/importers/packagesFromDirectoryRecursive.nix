@@ -1,3 +1,9 @@
+/*
+This function has been partially rewritten, but the understanding
+of how it works and much of the code is taken from Nixpkgs.
+Therefore, it is available under MIT License. Please see
+README.md for more information.
+*/
 {lib, ...}: let
   /*
     This is a partially rewritten lib.filesystem.packagesFromDirectoryRecursive, mainly

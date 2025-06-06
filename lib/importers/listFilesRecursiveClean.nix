@@ -1,3 +1,9 @@
+/*
+This function has been mostly rewritten, but the understanding
+of how it works and much of the code is taken from Nixpkgs.
+Therefore, it is available under MIT License. Please see
+README.md for more information.
+*/
 {lib, ...}: let
   inherit (lib.trivial) pipe;
   inherit (lib.strings) hasPrefix;
