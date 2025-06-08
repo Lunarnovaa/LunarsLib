@@ -9,17 +9,13 @@ in
     pkgs,
     inputs,
     moduleDir,
-    languages ? ["nix"],
-  }:
+  }: config:
     (inputs.nvf.lib.neovimConfiguration {
       inherit pkgs;
-      extraSpecialArgs = {
-        inherit (inputs) lunarsLib;
-      };
+      extraSpecialArgs = {inherit (inputs) lunarsLib;};
       modules = flatten [
-        (listNixRecursive (moduleDir + /common))
-        (listNixRecursive (moduleDir + /options))
-        (map (lang: (moduleDir + /languages + /${lang} + /module.nix)) languages)
+        (listNixRecursive moduleDir)
+        config
       ];
     })
     .neovim
