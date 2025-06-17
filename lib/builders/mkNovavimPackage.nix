@@ -7,12 +7,13 @@
 in
   {
     pkgs,
-    inputs,
+    nvf,
+    lunarsLib,
     moduleDir,
   }: config:
-    (inputs.nvf.lib.neovimConfiguration {
+    (nvf.lib.neovimConfiguration {
       inherit pkgs;
-      extraSpecialArgs = {inherit (inputs) lunarsLib;};
+      extraSpecialArgs = {inherit lunarsLib;};
       modules = flatten [
         (listNixRecursive moduleDir)
         config
