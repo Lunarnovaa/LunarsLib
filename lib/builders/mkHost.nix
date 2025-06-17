@@ -2,7 +2,6 @@
   lib,
   self,
 }: let
-  inherit (lib) nixosSystem;
   inherit (lib.modules) mkDefault;
   inherit (lib.lists) flatten;
   inherit (self.importers) listNixRecursive;
@@ -20,6 +19,7 @@ in
   {
     inputs,
     withSystem,
+    nixosSystem,
     moduleDir,
     hostDir,
   }:
@@ -45,7 +45,7 @@ in
         specialArgs = {
           inherit lib inputs;
           inherit self' inputs';
-          inherit (config._module.args) theme lunixpkgs pins;
+          inherit (config._module.args) theme lunixpkgs pins lunarsLib;
         };
         modules = flatten [
           {
