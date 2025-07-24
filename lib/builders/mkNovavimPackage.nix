@@ -1,6 +1,7 @@
 {
   lib,
   self,
+  ...
 }: let
   inherit (lib.lists) flatten;
   inherit (self.importers) listNixRecursive;

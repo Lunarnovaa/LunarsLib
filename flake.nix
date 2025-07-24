@@ -6,12 +6,14 @@
   outputs = inputs: let
     importFunction = location: (import (./lib + /${builtins.concatStringsSep "/" location} + ".nix") {
       inherit (inputs.nixpkgs) lib;
+      inherit (inputs.nixpkgs.legacyPackages."x86_64-linux") pkgs;
       inherit (inputs) self;
     });
   in {
     builders = {
       mkHost = importFunction ["builders" "mkHost"];
       mkNovavimPackage = importFunction ["builders" "mkNovavimPackage"];
+      wrapPackage = importFunction ["builders" "wrapPackage"];
     };
     generators = {
       mkCosmicSettings = importFunction ["generators" "mkCosmicSettings"];

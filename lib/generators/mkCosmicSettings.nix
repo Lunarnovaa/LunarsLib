@@ -1,6 +1,7 @@
 {
   lib,
   self,
+  ...
 }: let
   inherit (lib.attrsets) mergeAttrsList mapAttrsToList mapAttrs' nameValuePair;
   inherit (self.generators.ron) toRON;

@@ -1,6 +1,7 @@
 {
   lib,
   self,
+  ...
 }: let
   inherit (lib.trivial) pipe;
   inherit (lib.strings) hasSuffix;
