@@ -47,6 +47,7 @@ in
           inherit lib inputs;
           inherit self' inputs';
           inherit (config._module.args) theme lunixpkgs pins;
+          lunarsLib = self;
         };
         modules = flatten [
           {
