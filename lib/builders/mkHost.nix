@@ -46,7 +46,7 @@ in
         specialArgs = {
           inherit lib inputs;
           inherit self' inputs';
-          inherit (config._module.args) theme lunixpkgs;
+          inherit (config._module.args) theme lunixpkgs pins;
         };
         modules = flatten [
           {
