@@ -4,7 +4,7 @@
   ...
 }: let
   inherit (builtins) concatStringsSep;
-  inherit (lib.attrsets) mapAttrsToList getBin;
+  inherit (lib.attrsets) mapAttrsToList;
   inherit (lib.strings) getName getVersion makeBinPath escapeShellArgs;
   inherit (lib.trivial) pipe;
 
@@ -17,7 +17,7 @@
     ver = getVersion package;
 
     envArgs = pipe env [
-      (mapAttrsToList (n: v: "${n}=${v}"))
+      (mapAttrsToList (var: val: "--set ${var} ${val}"))
       (concatStringsSep " ")
     ];
   in
@@ -28,10 +28,9 @@
       nativeBuildInputs = [pkgs.makeWrapper];
       postBuild = ''
         wrapProgram $out/bin/${pname} \
-          ${map (n: "--add-flag" n) args} \
-          --add-flags ${escapeShellArgs args} \
-          --set ${envArgs} \
-          --prefix PATH : ${makeBinPath extraPackages}
+          --add-flags "${escapeShellArgs args}" \
+          ${envArgs} \
+          --set PATH ${makeBinPath extraPackages}
       '';
     };
 in
